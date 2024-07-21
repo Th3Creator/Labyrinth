@@ -1,4 +1,4 @@
-def ler_arquivo_como_matriz(caminho_arquivo):
+def arquivo_matriz(caminho_arquivo):
     with open(caminho_arquivo, 'r') as arquivo:
         linhas = arquivo.readlines()
     
@@ -7,7 +7,7 @@ def ler_arquivo_como_matriz(caminho_arquivo):
 
 # Exemplo de uso
 caminho_arquivo = 'maze/toy.txt'
-matriz = ler_arquivo_como_matriz(caminho_arquivo)
+matriz = arquivo_matriz(caminho_arquivo)
 
 # Exibindo a matriz
 for linha in matriz:
