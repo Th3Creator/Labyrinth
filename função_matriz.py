@@ -13,4 +13,4 @@ matriz = arquivo_matriz(caminho_arquivo)
 for linha in matriz:
     print(linha)
     
-print(matriz[1][0])  # Isso deve retornar 'S' teste
+print(matriz[1][0])  # Isso deve retornar 'S' 
