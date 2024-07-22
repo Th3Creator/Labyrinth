@@ -11,7 +11,7 @@
 - **`list(linha.strip())`**: Converte cada linha em uma lista de caracteres, removendo espaços em branco no início e no fim.
 - **`matriz`**: A matriz resultante onde cada linha do arquivo é uma lista de caracteres.
 
-### 3. Função DFS (Busca em Profundidade)
+### 3. Função DFS (Busca em Profundidade) - fonte: https://medium.com/@anwarhermuche/métodos-de-busca-em-grafos-bfs-dfs-cf17761a0dd9
 
 - **`LINHAS, COLUNAS = len(matriz), len(matriz[0])`**: Obtém o número de linhas e colunas da matriz.
 - **Condições de parada**:
