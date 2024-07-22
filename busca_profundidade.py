@@ -1,6 +1,4 @@
 import time # Para retornar o tempo de execução
-import os
-import sys
 
 # Função que transforma o arquivo em uma Matriz de caracteres
 
