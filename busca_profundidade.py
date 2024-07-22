@@ -83,6 +83,5 @@ def menu():
         else:
             print("Opção inválida. Tente novamente.")
 
-# Executando o menu
 menu()
 
