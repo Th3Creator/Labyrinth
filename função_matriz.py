@@ -6,7 +6,7 @@ def arquivo_matriz(caminho_arquivo):
     return matriz
 
 # Exemplo de uso
-caminho_arquivo = 'maze/toy.txt'
+caminho_arquivo = 'maze/maze3.txt'
 matriz = arquivo_matriz(caminho_arquivo)
 
 # Exibindo a matriz
