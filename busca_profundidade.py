@@ -3,7 +3,7 @@ import time # Para retornar o tempo de execução
 # Função que transforma o arquivo em uma Matriz de caracteres
 
 def função_matriz(caminho_arquivo):
-    with open(caminho_arquivo, 'r') as arquivo:
+    with open(caminho_arquivo, 'r', encoding='utf-8') as arquivo:
         linhas = arquivo.readlines()
     
     matriz = [list(linha.strip()) for linha in linhas]
@@ -17,8 +17,9 @@ def DFS(matriz, linha, coluna, visitado, caminho_atual):
     if (min(linha, coluna) < 0 or 
         linha == LINHAS or 
         coluna == COLUNAS or 
-        (linha, coluna) in visitado or 
-        matriz[linha][coluna] == '#'):
+        (linha, coluna) in visitado or
+        matriz[linha][coluna] == '#' or 
+        matriz[linha][coluna] == '█'):
         return False
 
     caminho_atual.append((linha, coluna))
@@ -51,6 +52,7 @@ def menu():
         if escolha == '1':
             caminho_arquivo = input("Digite o arquivo desejado: ")
             matriz = função_matriz(caminho_arquivo)
+
             for linha in matriz:
                 print(linha)
 
@@ -84,4 +86,3 @@ def menu():
             print("Opção inválida. Tente novamente.")
 
 menu()
-
