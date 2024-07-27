@@ -1,15 +1,13 @@
-import time # Para retornar o tempo de execução
-
-# Função que transforma o arquivo em uma Matriz de caracteres
+import time 
+import os
 
 def função_matriz(caminho_arquivo):
     with open(caminho_arquivo, 'r') as arquivo:
         linhas = arquivo.readlines()
     
     matriz = [list(linha.strip()) for linha in linhas]
+    
     return matriz
-
-# Função que realiza a Busca em Profundidade
 
 def DFS(matriz, linha, coluna, visitado, caminho_atual):
     LINHAS, COLUNAS = len(matriz), len(matriz[0])
@@ -39,23 +37,38 @@ def DFS(matriz, linha, coluna, visitado, caminho_atual):
     caminho_atual.pop()
     return False
 
-# Exemplo de uso
+def BuscaEmLargura(matriz, linha, coluna, visitado, caminho_atual):
+    print("teste")
 
-def menu():
+def Menu():
     while True:
-        print("\nMenu:")
-        print("1. Realizar busca em profundidade")
-        print("2. Sair")
+        # os.system('cls') or None     
+        print("\n\n ▄█          ▄████████ ▀█████████▄  ▄██   ▄      ▄████████  ▄█  ███▄▄▄▄       ███        ▄█    █▄\n"    + 
+              "███         ███    ███   ███    ███ ███   ██▄   ███    ███ ███  ███▀▀▀██▄ ▀█████████▄   ███    ███\n" + 
+              "███         ███    ███   ███    ███ ███▄▄▄███   ███    ███ ███▌ ███   ███    ▀███▀▀██   ███    ███\n"    + 
+              "███         ███    ███  ▄███▄▄▄██▀  ▀▀▀▀▀▀███  ▄███▄▄▄▄██▀ ███▌ ███   ███     ███   ▀  ▄███▄▄▄▄███▄▄\n"  + 
+              "███       ▀███████████ ▀▀███▀▀▀██▄  ▄██   ███ ▀▀███▀▀▀▀▀   ███▌ ███   ███     ███     ▀▀███▀▀▀▀███▀\n"   + 
+              "███         ███    ███   ███    ██▄ ███   ███ ▀███████████ ███  ███   ███     ███       ███    ███\n"    + 
+              "███▌    ▄   ███    ███   ███    ███ ███   ███   ███    ███ ███  ███   ███     ███       ███    ███\n"    + 
+              "█████▄▄██   ███    █▀  ▄█████████▀   ▀█████▀    ███    ███ █▀    ▀█   █▀     ▄████▀     ███    █▀")
+        print("\n\n1. Realizar busca em profundidade")
+        print("2. Realizar busca em largura")
+        print("3. Sair")
+        
         escolha = input("Escolha uma opção: ")
 
         if escolha == '1':
-            caminho_arquivo = input("Digite o arquivo desejado: ")
+            # Felipe
+            caminho_arquivo = input("Digite o arquivo desejado:")
+           
             matriz = função_matriz(caminho_arquivo)
+           
             for linha in matriz:
                 print(linha)
 
             # Encontrando a posição inicial 'S'
             posicao_inicial = None
+            
             for i in range(len(matriz)):
                 for j in range(len(matriz[i])):
                     if matriz[i][j] == 'S':
@@ -69,19 +82,29 @@ def menu():
                 linha_inicial, coluna_inicial = posicao_inicial
                 visitado = set()
                 caminho_atual = []
+
             # Medindo o tempo de execução
             inicio = time.time()
+
             if not DFS(matriz, linha_inicial, coluna_inicial, visitado, caminho_atual):
                 print("Nenhum caminho encontrado do início ao fim.")
+           
             fim = time.time()
 
             tempo_execucao = fim - inicio
+           
             print(f"Tempo de execução da DFS: {tempo_execucao:.6f} segundos")
         elif escolha == '2':
+            # Christian
+            print("teste 2")
+
+
+
+
+        elif escolha == '3':
             print("Saindo do programa...")
             break
         else:
             print("Opção inválida. Tente novamente.")
 
-menu()
-
+Menu()
