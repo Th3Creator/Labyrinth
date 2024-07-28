@@ -1,7 +1,7 @@
 import time 
-import os
+from collections import deque
 
-def função_matriz(caminho_arquivo):
+def CriaMatriz(caminho_arquivo):
     with open(caminho_arquivo, 'r', encoding='utf-8') as arquivo:
         linhas = arquivo.readlines()
     
@@ -9,7 +9,7 @@ def função_matriz(caminho_arquivo):
     
     return matriz
 
-def DFS(matriz, linha, coluna, visitado, caminho_atual):
+def BuscaEmProfundidade(matriz, linha, coluna, visitado, caminhoAtual):
     LINHAS, COLUNAS = len(matriz), len(matriz[0])
 
     if (min(linha, coluna) < 0 or 
@@ -20,30 +20,54 @@ def DFS(matriz, linha, coluna, visitado, caminho_atual):
         matriz[linha][coluna] == '█'):
         return False
 
-    caminho_atual.append((linha, coluna))
+    caminhoAtual.append((linha, coluna))
 
     if matriz[linha][coluna] == 'E':
-        print("Caminho encontrado:", caminho_atual)
+        print("Caminho encontrado:", caminhoAtual)
         return True
 
     visitado.add((linha, coluna))
 
-    if (DFS(matriz, linha + 1, coluna, visitado, caminho_atual) or
-        DFS(matriz, linha, coluna + 1, visitado, caminho_atual) or
-        DFS(matriz, linha - 1, coluna, visitado, caminho_atual) or
-        DFS(matriz, linha, coluna - 1, visitado, caminho_atual)):
+    if (BuscaEmProfundidade(matriz, linha + 1, coluna, visitado, caminhoAtual) or
+        BuscaEmProfundidade(matriz, linha, coluna + 1, visitado, caminhoAtual) or
+        BuscaEmProfundidade(matriz, linha - 1, coluna, visitado, caminhoAtual) or
+        BuscaEmProfundidade(matriz, linha, coluna - 1, visitado, caminhoAtual)):
         return True
 
     visitado.remove((linha, coluna))
-    caminho_atual.pop()
+    caminhoAtual.pop()
+
     return False
 
-def BuscaEmLargura(matriz, linha, coluna, visitado, caminho_atual):
-    print("teste")
+def BuscaEmLargura(matriz, linha, coluna, visitados, caminhos):
+    LINHAS, COLUNAS = len(matriz), len(matriz[0])
+    
+    fila = deque([(linha, coluna)])
+    visitados.add((linha, coluna))
+    
+    while fila:
+        linha, coluna = fila.popleft()
+        
+        if matriz[linha][coluna] == 'E':
+            print("Caminho encontrado:", sorted(visitados))
+            return True
+        
+        vizinhos = [(linha+1, coluna), (linha-1, coluna), (linha, coluna+1), (linha, coluna-1)]
+        
+        for newLinha, newColuna in vizinhos:
+            if (0 <= newLinha < LINHAS and 
+                0 <= newColuna < COLUNAS and 
+                matriz[newLinha][newColuna] != '#' and
+                matriz[newLinha][newColuna] != '█' and  
+                (newLinha, newColuna) not in visitados):
+                
+                fila.append((newLinha, newColuna))
+                visitados.add((newLinha, newColuna))
+    
+    return False
 
 def Menu():
-    while True:
-        # os.system('cls') or None     
+    while True:  
         print("\n\n ▄█          ▄████████ ▀█████████▄  ▄██   ▄      ▄████████  ▄█  ███▄▄▄▄       ███        ▄█    █▄\n"    + 
               "███         ███    ███   ███    ███ ███   ██▄   ███    ███ ███  ███▀▀▀██▄ ▀█████████▄   ███    ███\n" + 
               "███         ███    ███   ███    ███ ███▄▄▄███   ███    ███ ███▌ ███   ███    ▀███▀▀██   ███    ███\n"    + 
@@ -59,49 +83,65 @@ def Menu():
         escolha = input("Escolha uma opção: ")
 
         if escolha == '1':
-            # Felipe
-            caminho_arquivo = input("Digite o arquivo desejado:")
+            caminhoArquivo = input("Digite o arquivo desejado:")
            
-            matriz = função_matriz(caminho_arquivo)
+            matriz = CriaMatriz(caminhoArquivo)
            
             for linha in matriz:
                 print(linha)
 
-            # Encontrando a posição inicial 'S'
-            posicao_inicial = None
+            posicaoInicial = None
             
             for i in range(len(matriz)):
                 for j in range(len(matriz[i])):
                     if matriz[i][j] == 'S':
-                        posicao_inicial = (i, j)
+                        posicaoInicial = (i, j)
                         break
-                if posicao_inicial:
+                if posicaoInicial:
                     break
 
-            # Calculando e imprimindo o caminho
-            if posicao_inicial:
-                linha_inicial, coluna_inicial = posicao_inicial
+            if posicaoInicial:
+                linhaInicial, colunaInicial = posicaoInicial
                 visitado = set()
-                caminho_atual = []
+                caminhoAtual = []
 
-            # Medindo o tempo de execução
             inicio = time.time()
-
-            if not DFS(matriz, linha_inicial, coluna_inicial, visitado, caminho_atual):
-                print("Nenhum caminho encontrado do início ao fim.")
-           
+            if not BuscaEmProfundidade(matriz, linhaInicial, colunaInicial, visitado, caminhoAtual):
+                print("Nenhum caminho encontrado do início ao fim.")           
             fim = time.time()
 
-            tempo_execucao = fim - inicio
+            tempoDeExecucao = fim - inicio
            
-            print(f"Tempo de execução da DFS: {tempo_execucao:.6f} segundos")
+            print(f"Tempo de execução da busca em profundidade: {tempoDeExecucao:.6f} segundos")
         elif escolha == '2':
-            # Christian
-            print("teste 2")
+            caminhoArquivo = input("Digite o arquivo desejado:")
+           
+            matriz = CriaMatriz(caminhoArquivo)
+           
+            for linha in matriz:
+                print(linha)
 
+            posicaoInicial = None
+            
+            for i in range(len(matriz)):
+                for j in range(len(matriz[i])):
+                    if matriz[i][j] == 'S':
+                        posicaoInicial = (i, j)
+                        break
+                if posicaoInicial:
+                    break
 
+            if posicaoInicial:
+                linhaInicial, colunaInicial = posicaoInicial
+                visitado = set()
+                caminhos = []
 
+            inicializaCronometro = time.time()
+            if not BuscaEmLargura(matriz, linhaInicial, colunaInicial, visitado, caminhos):
+                print("Nenhum caminho encontrado do início ao fim.")
+            finalizaCronometro = time.time()
 
+            print(f"Tempo de execução da busca em largura: {(finalizaCronometro - inicializaCronometro):.6f} segundos")
         elif escolha == '3':
             print("Saindo do programa...")
             break
