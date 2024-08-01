@@ -23,7 +23,7 @@ def BuscaEmProfundidade(matriz, linha, coluna, visitado, caminhoAtual):
     caminhoAtual.append((linha, coluna))
 
     if matriz[linha][coluna] == 'E':
-        print("Caminho encontrado:", caminhoAtual)
+        print("Caminho encontrado:", sorted(caminhoAtual))
         return True
 
     visitado.add((linha, coluna))
@@ -39,17 +39,18 @@ def BuscaEmProfundidade(matriz, linha, coluna, visitado, caminhoAtual):
 
     return False
 
-def BuscaEmLargura(matriz, linha, coluna, visitados, caminhos):
+def BuscaEmLargura(matriz, linha, coluna, visitados):
     LINHAS, COLUNAS = len(matriz), len(matriz[0])
     
-    fila = deque([(linha, coluna)])
+    fila = deque([((linha, coluna), [(linha, coluna)])])
+   
     visitados.add((linha, coluna))
     
     while fila:
-        linha, coluna = fila.popleft()
+        (linha, coluna), caminho = fila.popleft()
         
         if matriz[linha][coluna] == 'E':
-            print("Caminho encontrado:", sorted(visitados))
+            print("Caminho encontrado:", caminho)
             return True
         
         vizinhos = [(linha+1, coluna), (linha-1, coluna), (linha, coluna+1), (linha, coluna-1)]
@@ -61,7 +62,7 @@ def BuscaEmLargura(matriz, linha, coluna, visitados, caminhos):
                 matriz[newLinha][newColuna] != '█' and  
                 (newLinha, newColuna) not in visitados):
                 
-                fila.append((newLinha, newColuna))
+                fila.append(((newLinha, newColuna), caminho + [(newLinha, newColuna)]))
                 visitados.add((newLinha, newColuna))
     
     return False
@@ -137,7 +138,7 @@ def Menu():
                 caminhos = []
 
             inicializaCronometro = time.time()
-            if not BuscaEmLargura(matriz, linhaInicial, colunaInicial, visitado, caminhos):
+            if not BuscaEmLargura(matriz, linhaInicial, colunaInicial, visitado):
                 print("Nenhum caminho encontrado do início ao fim.")
             finalizaCronometro = time.time()
 
