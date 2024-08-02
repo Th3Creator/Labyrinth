@@ -25,6 +25,6 @@ Este programa implementa duas técnicas de busca em um labirinto representado po
 
 ## Autores
 
-Felipe Rafael e Christian 
+Felipe Fialho e Christian Daniel 
 
 ---
