@@ -2,7 +2,7 @@
 
 ## Descrição
 
-Este programa implementa duas técnicas de busca em um labirinto representado por uma matriz: Busca em Profundidade (DFS) e Busca em Largura (BFS). O labirinto é carregado a partir de um arquivo de texto, onde 'S' representa a posição inicial, 'E' a posição final, ' ' (espaço) representa caminhos livres e '#' ou '█' representam obstáculos. O usuário pode escolher qual técnica de busca utilizar através de um menu interativo.
+Este programa implementa duas técnicas de busca em um labirinto representado por uma matriz: Busca em Profundidade (DFS) e Busca em Largura (BFS), nos quais as funções foram baseadas e adaptadas a partir deste blog sobre [Métodos de Buscas em Grafos](https://medium.com/@anwarhermuche/métodos-de-busca-em-grafos-bfs-dfs-cf17761a0dd9). O labirinto é carregado a partir de um arquivo de texto, onde 'S' representa a posição inicial, 'E' a posição final, ' ' (espaço) representa caminhos livres e '#' ou '█' representam obstáculos. O usuário pode escolher qual técnica de busca utilizar através de um menu interativo.
 
 ## Funcionalidades
 
